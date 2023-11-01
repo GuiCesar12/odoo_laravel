@@ -29,9 +29,9 @@ class Rpc extends Model
         // dd(json_decode($run)[0]->login);
         
         $result = json_decode($run,true);
-        // dd();
+        // dd($result);
         if(!$result == null){
-            return ["email"=>$result[0]["login"],"senha"=>$pass];
+            return ["email"=>$result[0]["login"],"senha"=>$pass,"id"=>$result[0]["id"]];
         }else{
             return null;
         }

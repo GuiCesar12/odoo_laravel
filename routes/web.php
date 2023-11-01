@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\InvoiceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,14 @@ use App\Http\Controllers\LoginController;
 Route::get('/', function () {
     return view('index.index');
 })->name('index')->middleware('odoo');
-// Route::get('/',[LoginController::class,'main'])->name('index');
+
+
+
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/validate',[LoginController::class,'login'])->name('login_validate');
+
+///////////Invoices///////////////////
+Route::prefix('invoices')->group(function(){
+    Route::get('/',[InvoiceController::class,'index'])->name('invoices')->middleware('odoo');
+});
+

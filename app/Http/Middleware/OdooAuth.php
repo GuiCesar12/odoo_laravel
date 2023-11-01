@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Session;
 
 class OdooAuth
 {
@@ -15,6 +16,12 @@ class OdooAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!Session::get('email')) {
+            return redirect()->route('login'); // Redireciona para a rota 'login'
+        }
+
         return $next($request);
     }
+
+    
 }

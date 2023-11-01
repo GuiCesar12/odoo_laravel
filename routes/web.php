@@ -15,6 +15,7 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('index.index');
-});
-Route::get('/login',[LoginController::class,'index']);
+})->name('index')->middleware('odoo');
+// Route::get('/',[LoginController::class,'main'])->name('index');
+Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/validate',[LoginController::class,'login'])->name('login_validate');

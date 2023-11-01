@@ -12,17 +12,18 @@ class LoginController extends Controller
         return view('login.login');
     }
     public function login(Request $request){
+        
         //fazer autenticação
         $rpc = new Rpc;
-        $auth = $rpc->autenticate($request->user,$request->pass);
+        // $auth = "";
+        $auth = $rpc->authenticate($request->user,$request->pass);
         
         try{
-            if($auth == $request->user){
-                Session::put('name',bcrypt($auth));
+            if($auth == false){
+                throw new Exception("Falha no login");
             }
-            
-
-
+            Session::put('email',$auth);
+            return 1;
         }
         catch(Exception $e){
             return response('usuario e senha invalidos',400);

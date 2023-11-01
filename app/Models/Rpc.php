@@ -23,12 +23,18 @@ class Rpc extends Model
     
 
 
-    public function autenticate($user,$pass){
+    public function authenticate($user,$pass){
         // $run = shell_exec("python3 authenticate.py " . $user . " " . $pass." 2>&1");
         $run = shell_exec("python3 python_scripts/authenticate.py " . $user . " " . $pass." 2>&1");
         // dd(json_decode($run)[0]->login);
-        $result = json_decode($run)[0]->login;
-        return $result;
+        
+        $result = json_decode($run,true);
+        // dd();
+        if(!$result == null){
+            return ["email"=>$result[0]["login"],"senha"=>$pass];
+        }else{
+            return null;
+        }
     }
 
 }

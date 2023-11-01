@@ -26,26 +26,26 @@
                 <div class="form-group col-md-3"></div>
                 <div class="form-group col-md-6">
                     <label for="name">E-mail Corporativo</label>
-                    <input type="text" name="email" class="form-control" id="email" required>
+                    <input type="text" name="user" class="form-control" id="email" required>
                 </div>
                 </div>
 
                 <div class="row">
                 
-                <div class="form-group col-md-3"></div>
-                <div class="form-group col-md-6">
-                    <label for="name">Senha</label>
-                    <input type="password" name="senha" class="form-control" id="senha" required>
-                </div>
-                </div>
-                {{-- <div class="my-3">
-                <div class="loading">Carregando</div>
-                <div class="error-message"></div>
-                </div> --}}
+                    <div class="form-group col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="name">Senha</label>
+                        <input type="password" name="pass" class="form-control" id="senha" required>
+                    </div>
+                    </div>
+                    {{-- <div class="my-3">
+                    <div class="loading">Carregando</div>
+                    <div class="error-message"></div>
+                    </div> --}}
 
-                <div class="text-center btn-sm"><a href="esqueci.php">Esqueci minha senha</a></div><br>
-                <div class="text-center"><button name="save">Enviar</button></div>
-
+                    <div class="text-center btn-sm"><a href="esqueci.php">Esqueci minha senha</a></div><br>
+                    <div class="text-center"><button name="save">Enviar</button></div>
+                </div>
             </form>
             </div>
         </div>
@@ -63,10 +63,7 @@
                     method: 'post',
                     assync: false,
                     success: function(returned){
-                        // if(sessionStorage.getItem('nome_da_sessao')){
-                        //     window.location = "rota index";
-                        // }
-                        console.log(returned)
+                        window.location = '{{route('index')}}';
                     },
                     error: function(error, jhrx){
                         

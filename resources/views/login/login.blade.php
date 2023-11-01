@@ -43,9 +43,9 @@
                     <div class="error-message"></div>
                     </div> --}}
 
-                    <div class="text-center btn-sm"><a href="esqueci.php">Esqueci minha senha</a></div><br>
-                    <div class="text-center"><button name="save">Enviar</button></div>
-                </div>
+                <div class="text-center btn-sm"><a href="esqueci.php">Esqueci minha senha</a></div><br>
+                <div class="text-center"><button name="save">Enviar</button></div>
+                
             </form>
             </div>
         </div>

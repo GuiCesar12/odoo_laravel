@@ -33,7 +33,7 @@
 
 <body>
   @extends('index.header')
-  <br><br><br>
+  <br><br>
   @yield('content')
   @extends('index.footer')
   <!-- Vendor JS Files -->

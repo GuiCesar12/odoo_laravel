@@ -26,5 +26,6 @@ Route::post('/validate',[LoginController::class,'login'])->name('login_validate'
 ///////////Invoices///////////////////
 Route::prefix('invoices')->group(function(){
     Route::get('/',[InvoiceController::class,'index'])->name('invoices')->middleware('odoo');
+    Route::get('/select',[InvoiceController::class,'select'])->name('selectInvoices')->middleware('odoo');
 });
 

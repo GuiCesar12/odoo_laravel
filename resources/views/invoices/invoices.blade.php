@@ -1,5 +1,6 @@
 @extends('index.main')
 @section('content')
+@include('invoices.modal')
 <section id="faq" class="faq section-bg" >
     <div class="container" data-aos="fade-up">
         <div class="section-title">
@@ -71,15 +72,16 @@
             columnDefs:[{
             target:5,
             render:function(data){
-                return `<i class="bi bi-shift-fill"></i>`;
+                return `<button type="button" class="btn btn-primary "id="modal" data-toggle="modal" data-target="#exampleModalLong">Details</button>`;
             }
             }]
         });
         updateTable()
+        $(document).on('click','#modal',function(){
+            $('#exampleModalLong').modal('toggle')
+        })
     });   
-    $('#modal').on('click', function(){
-        
-    });
+
 
 
 </script>

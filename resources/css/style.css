@@ -9,6 +9,12 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+#exampleModal{
+  z-index: 9999;
+}
+.circular--landscape { display: inline-block; position: relative; width: 200px; height: 200px; overflow: hidden; border-radius: 50%; } 
+.circular--landscape img { width: auto; height: 100%; margin-left: -50px; }
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -519,7 +525,7 @@ section {
 }
 
 .section-bg {
-  background-color: #f3f5fa;
+  background-color: #ffffff;
 }
 
 .section-title {

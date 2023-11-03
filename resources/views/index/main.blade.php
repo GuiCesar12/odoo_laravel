@@ -10,8 +10,10 @@
   <meta content="" name="keywords">
 
    <!-- Favicons -->
-  <link href="{{ URL::asset('resources/img/favicon.png') }}" rel="icon">
-  <link href="{{ URL::asset('resources/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+   <link rel="icon" href="https://www.tracktracerx.com/wp-content/uploads/2022/07/favicon-150x150.png" sizes="32x32" />
+   <link rel="icon" href="https://www.tracktracerx.com/wp-content/uploads/2022/07/favicon-300x300.png" sizes="192x192" />
+   <link rel="apple-touch-icon" href="https://www.tracktracerx.com/wp-content/uploads/2022/07/favicon-300x300.png" />
+   <meta name="msapplication-TileImage" content="https://www.tracktracerx.com/wp-content/uploads/2022/07/favicon-300x300.png" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">

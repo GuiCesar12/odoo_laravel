@@ -51,12 +51,12 @@
         }catch(e){
             Swal.fire('Error! ' + e, '', 'error')
         }
-}
+    }
 
     $(document).ready(function() {
         tableInvoices = $('#invoices').DataTable({
-            // scrollX: true,
-            // responsive: true,
+            scrollX: true,
+            responsive: true,
             
             columns:[{
                 data:'id'

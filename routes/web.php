@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ContractsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,4 +29,9 @@ Route::prefix('invoices')->group(function(){
     Route::get('/',[InvoiceController::class,'index'])->name('invoices')->middleware('odoo');
     Route::get('/select',[InvoiceController::class,'select'])->name('selectInvoices')->middleware('odoo');
 });
-
+/////////Contracts///////////////////////////////////
+Route::prefix('contracts')->group(function(){
+    Route::get('/',[ContractsController::class,'index'])->name('contracts')->middleware('odoo');
+    Route::get('/select',[ContractsController::class,'select'])->name('selectContracts');
+    Route::post('/updatePayment',[ContractsController::class,'update'])->name('updatePayments');
+});

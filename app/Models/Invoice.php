@@ -16,7 +16,7 @@ class Invoice extends Model
         return $result;
 
     }
-    private function get_id_contact_user($user,$pass,$id){
+    protected function get_id_contact_user($user,$pass,$id){
         $run = shell_exec("python3 python_scripts/contacts.py " . $user . " " . $pass." ".$id." 2>&1");
         $result = json_decode($run,true);
         

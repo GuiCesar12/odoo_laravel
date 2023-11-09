@@ -1,5 +1,6 @@
 @extends('index.main')
 @section('content')
+@include('contracts.modal')
 <section id="why-us" class="why-us section-bg">
     <div class="container-fluid" data-aos="fade-up">
         <div class="row">
@@ -10,65 +11,18 @@
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
                     </p>
                 </div>
-                <div class="accordion-list">
-                    <ul>
-                        <li>
-                        <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Contracts <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                            <p>
-                                <table id="contracts" class="display" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Name:</th>
-                                            <th>Type:</th>
-                                            <th>End Date:</th>
-                                            <th>Start Date:</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </p>
-                        </div>
-                        </li>
-                        <li>
-                        <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Payment Modules <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
-                            <p>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                          <div class="card">
-                                            <div class="card-body">
-                                              <h5 class="card-title">Special title treatment</h5>
-                                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                          <div class="card">
-                                            <div class="card-body">
-                                              <h5 class="card-title">Special title treatment</h5>
-                                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </p>
-                        </div>
-                        </li>
-                        <li>
-                        <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
-                            <p>
-                            Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                            </p>
-                        </div>
-                        </li>
-                    </ul>
-                </div>
+                <table id="contracts" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Name:</th>
+                            <th>Type:</th>
+                            <th>End Date:</th>
+                            <th>Start Date:</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+                
             </div>
             <div class="col-lg-1 align-items-stretch" data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
         </div>
@@ -82,24 +36,28 @@
 
 @endsection
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
 <script>
-function get_payments(){
-    try{
-            $.ajax({
-                url:'{{route('selectContracts')}}',
-                method: 'get',
-                assync: false,
-                success:function(returned){
-                    console.log(returned[0]["nome_cartao"])
-                },
-                error:function(error, jhrx){
-                    console.log(error, jhrx);
-                }
-            });
-        }catch(e){
-            Swal.fire('Error! ' + e, '', 'error')
-        }
-}
+// function get_payments(){
+//     try{
+//             $.ajax({
+//                 url:'{{route('selectContracts')}}',
+//                 method: 'get',
+//                 assync: false,
+//                 success:function(returned){
+//                     $.each(returned,function(){
+//                         $('[name="row_collapse"]').innerHTML()
+//                     })
+//                 },
+//                 error:function(error, jhrx){
+//                     console.log(error, jhrx);
+//                 }
+//             });
+//         }catch(e){
+//             Swal.fire('Error! ' + e, '', 'error')
+//         }
+// }
 
 
 
@@ -139,12 +97,97 @@ $(document).ready(function() {
         target:4,
         render:function(data){
             return `<button type="button" class="btn btn-primary "id="modal" data-toggle="modal" data-target="#exampleModalLong">Details</button>`;
+
         }
         }]
     });
+    $('#id_contrato').hide()
     updateTable()
-        get_payments()
+    $('#numero_cartao').inputmask('9999 9999 9999 9999');
 });   
+$(document).on('click','#modal',function(){
+    let tr = $(this).closest('tr')
+    let data = tableContracts.row(tr).data()
+    $('#cancel-alter').hide()
+    $('#save_payment').hide()
+    //pagamentos
+    $('#id_contrato').val(data.id)
+    $('#numero_cartao').val('************'+data.numero_cartao_back.slice(-4)).attr('disabled','disabled')
+    $('#numero_cartao').val('************'+data.numero_cartao_back.slice(-4)).prop('disabled',true)
+    $('#nome_cartao').val(data.nome_cartao_back).attr('disabled','disabled')
+    $('#nome_cartao').val(data.nome_cartao_back).prop('disabled',true)
+    $('#cvv').val(' ').attr('disabled','disabled')
+    $('#cvv').val(' ').prop('disabled',true)
+    $('#validade').val(' ').attr('disabled','disabled')
+    $('#validade').val(' ').prop('disabled',true)
+    $('#exampleModalLong').modal('toggle')
+
+})
+$(document).on('click','#edit_payment',function(){
+    $('#cancel-alter').show()
+    $('#edit_payment').hide()
+    $('#save_payment').show()
+    $('#numero_cartao').val(' ').attr('disabled','disabled')
+    $('#numero_cartao').val(' ').prop('disabled',false)
+    $('#nome_cartao').val(' ').attr('disabled','disabled')
+    $('#nome_cartao').val(' ').prop('disabled',false)
+    $('#cvv').val(' ').attr('disabled','disabled')
+    $('#cvv').val(' ').prop('disabled',false)
+    $('#validade').val(' ').attr('disabled','disabled')
+    $('#validade').val(' ').prop('disabled',false)
+})
+$(document).on('click','#cancel-alter',function(){
+    $('#cancel-alter').hide()
+    $('#edit_payment').show()
+    $('#save_payment').hide()
+    $('#numero_cartao').val(' ').attr('disabled','disabled')
+    $('#numero_cartao').val(' ').prop('disabled',true)
+    $('#nome_cartao').val(' ').attr('disabled','disabled')
+    $('#nome_cartao').val(' ').prop('disabled',true)
+    $('#cvv').val(' ').attr('disabled','disabled')
+    $('#cvv').val(' ').prop('disabled',true)
+    $('#validade').val(' ').attr('disabled','disabled')
+    $('#validade').val(' ').prop('disabled',true)
+    $('#exampleModalLong').modal('toggle')
+
+})
+$(document).on('click','#save_payment',function(){
+    try{
+        //verifyForm();
+        $('#form_card').serialize()
+        Swal.fire({
+            title: 'Do you want to save the card?',
+            // showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Ok',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '{{route('updatePayments')}}',
+                    data: $('#form_card').serialize(),
+                    method: 'post',
+                    assync: false,
+                    success: function(returned){
+                        Swal.fire('Success!','Success saved' , 'success')
+                        $('#exampleModalLong').modal('toggle')
+                        updateTable()
+
+                        
+                    },
+                    error: function(error, jhrx){
+                        Swal.fire('Error!',"'"+error.responseText+"'" , 'error')
+                        console.log(error, jhrx);
+                    }
+                });
+                
+            }
+        });
+    }catch(e){
+        Swal.fire('Error! ' + e, '', 'error')
+    }
+})
+
 
 
 </script>

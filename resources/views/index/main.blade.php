@@ -27,6 +27,7 @@
   <link href="{{ URL::asset('resources/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('resources/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
   <!-- Template Main CSS File -->
   <link href="{{ URL::asset('resources/css/style.css') }}" rel="stylesheet">
   
@@ -52,7 +53,8 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Template Main JS File -->
   <script src="{{ URL::asset('resources/js/main.js') }}"></script>
-  <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 	@stack('scripts')
  
 

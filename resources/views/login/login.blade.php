@@ -1,18 +1,8 @@
 @extends('index.main')
 @section('content')
-<header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center">
-      <div class="col-md-5"></div>
-      <div class="col-md-3">
-        <h1 class="logo me-auto"><a href="#">Zift Customer</a></h1>
-      </div>
-      <div class="col-md-2"></div>
-      <div class="col-md-2"></div>
-    </div>
-</header>
-  <br><br>
+@include('index.header')
 <br>
-
+<br>
 <section id="contact" class="contact">
     <div class="container" data-aos="fade-up">
         <div class="section-title">
@@ -43,8 +33,8 @@
                     <div class="error-message"></div>
                     </div> --}}
 
-                <div class="text-center btn-sm"><a href="esqueci.php">Esqueci minha senha</a></div><br>
-                <div class="text-center"><button name="save">Enviar</button></div>
+                {{-- <div class="text-center btn-sm"><a href="esqueci.php">Esqueci minha senha</a></div><br> --}}
+                <div class="text-center"><button  class="btn btn-primary" name="save">Enviar</button></div>
                 
             </form>
             </div>
@@ -57,12 +47,20 @@
 <script>
     $('[name="save"]').on('click', function(){
             try{
+                Swal.fire({
+                            title: 'Loading...',
+                            allowOutsideClick: false,
+                            onBeforeOpen: () => {
+                                Swal.showLoading();
+                            }
+                });
                 $.ajax({
                     url:'{{route('login_validate')}}',
                     data: $('#form_login').serialize(),
                     method: 'post',
                     assync: false,
                     success: function(returned){
+                        Swal.close(); // Feche o Swal após a simulação do carregamento
                         window.location = '{{route('index')}}';
                     },
                     error: function(error, jhrx){

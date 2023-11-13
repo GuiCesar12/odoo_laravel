@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col-lg-10 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
                 <div class="content">
-                    <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
+                    <h3><strong>Este são seus contratos </strong></h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                        Para acessar as informações de pagamento clique em Details
                     </p>
                 </div>
                 <table id="contracts" class="display" style="width:100%">
@@ -64,14 +64,23 @@
 tableContracts = null
     function updateTable(){
         try{
+            Swal.fire({
+                title: 'Atualizando a tabela...',
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             $.ajax({
                 url:'{{route('selectContracts')}}',
                 method: 'get',
                 assync: false,
                 success:function(returned){
+                    Swal.close();
                 tableContracts.clear().rows.add(returned).draw();
                 },
                 error:function(error, jhrx){
+                    Swal.fire('Error!',"'"+error.responseText+"'" , 'error')
                     console.log(error, jhrx);
                 }
             });
@@ -104,16 +113,19 @@ $(document).ready(function() {
     $('#id_contrato').hide()
     updateTable()
     $('#numero_cartao').inputmask('9999 9999 9999 9999');
+    $('#cvv').inputmask('999')
+    $('#validade').inputmask('99/9999')
 });   
 $(document).on('click','#modal',function(){
     let tr = $(this).closest('tr')
     let data = tableContracts.row(tr).data()
     $('#cancel-alter').hide()
     $('#save_payment').hide()
+    $('#edit_payment').show()
     //pagamentos
     $('#id_contrato').val(data.id)
-    $('#numero_cartao').val('************'+data.numero_cartao_back.slice(-4)).attr('disabled','disabled')
-    $('#numero_cartao').val('************'+data.numero_cartao_back.slice(-4)).prop('disabled',true)
+    $('#numero_cartao').val('000000000000'+data.numero_cartao_back.slice(-4)).attr('disabled','disabled')
+    $('#numero_cartao').val('000000000000'+data.numero_cartao_back.slice(-4)).prop('disabled',true)
     $('#nome_cartao').val(data.nome_cartao_back).attr('disabled','disabled')
     $('#nome_cartao').val(data.nome_cartao_back).prop('disabled',true)
     $('#cvv').val(' ').attr('disabled','disabled')
@@ -163,15 +175,22 @@ $(document).on('click','#save_payment',function(){
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Carregando...',
+                    allowOutsideClick: false,
+                    onBeforeOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
                 $.ajax({
                     url: '{{route('updatePayments')}}',
                     data: $('#form_card').serialize(),
                     method: 'post',
                     assync: false,
                     success: function(returned){
-                        Swal.fire('Success!','Success saved' , 'success')
                         $('#exampleModalLong').modal('toggle')
                         updateTable()
+                        Swal.fire('Success!','Success saved' , 'success')
 
                         
                     },

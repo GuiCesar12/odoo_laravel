@@ -1,6 +1,8 @@
 @extends('index.main')
 @section('content')
 @include('invoices.modal')
+<br>
+<br>
 <section id="faq" class="faq section-bg" >
     <div class="container" data-aos="fade-up">
         <div class="section-title">
@@ -37,14 +39,23 @@
     tableInvoices = null
     function updateTable(){
         try{
+            Swal.fire({
+                title: 'Carregando...',
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             $.ajax({
                 url:'{{route('selectInvoices')}}',
                 method: 'get',
                 assync: false,
                 success:function(returned){
+                    Swal.close()
                 tableInvoices.clear().rows.add(returned).draw();
                 },
                 error:function(error, jhrx){
+                    Swal.fire('Error!',"'"+error.responseText+"'" , 'error')
                     console.log(error, jhrx);
                 }
             });
@@ -72,13 +83,43 @@
             columnDefs:[{
             target:5,
             render:function(data){
-                return `<button type="button" class="btn btn-primary "id="modal" data-toggle="modal" data-target="#exampleModalLong">Details</button>`;
+                return `<button type="button" class="btn btn-primary "id="download">Download</button>`;
             }
             }]
         });
         updateTable()
-        $(document).on('click','#modal',function(){
-            $('#exampleModalLong').modal('toggle')
+            $(document).on('click','#download',function(){
+                let tr = $(this).closest('tr')
+                let data = tableInvoices.row(tr).data()
+                console.log(data.id)
+                try{
+                    Swal.fire({
+                            title: 'Loading download...',
+                            allowOutsideClick: false,
+                            onBeforeOpen: () => {
+                                Swal.showLoading();
+                            }
+                    });
+                $.ajax({
+                    url:'{{route('downloadInvoice')}}',
+                    method: 'post',
+                    data:{'id_invoice':data.id},
+                    assync: false,
+                    success:function(returned){
+                       
+                        // Simule um tempo de carregamento (substitua por sua lógica real)
+                        
+                            Swal.close(); // Feche o Swal após a simulação do carregamento
+                        
+                                        },
+                    error:function(error, jhrx){
+                        Swal.fire('Error!',"'"+error.responseText+"'" , 'error')
+                        console.log(error, jhrx);
+                    }
+                });
+            }catch(e){
+                Swal.fire('Error! ' + e, '', 'error')
+            }
         })
     });   
 

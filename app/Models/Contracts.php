@@ -24,7 +24,9 @@ class Contracts extends Invoice
         }
         $requests = $this->request_to_array($request);
         list($mes,$ano) = explode('/',$requests["validade"]);
-        $run = shell_exec("python3 python_scripts/update_payments.py " . $user . " " . $pass." ".intval($requests["id_contrato"])." ".$requests["numero_cartao"]." ".$requests["cvv"]." ".trim($requests["nome_cartao"])." ".$mes." ".$ano." 2>&1");
+        // dd($user . " " . $pass." ".$requests["id_contrato"]." ".$requests["numero_cartao"]." ".$requests["cvv"]." ".trim($requests["nome_cartao"])." ".$mes." ".$ano);
+        $run = shell_exec("python3 python_scripts/update_payments.py " . $user . " " . $pass." ".$requests["id_contrato"]." ".$requests["numero_cartao"]." ".$requests["cvv"]." ".$requests["nome_cartao"]." ".$mes." ".$ano);
+        // dd($run);
         if($run == null){
             return response("Erro ao alterar dados do cartão",400);
         }
@@ -32,7 +34,9 @@ class Contracts extends Invoice
 
     }
     private function request_to_array($request){
-        $requests = ["id_contrato"=>$request->id_contrato,"numero_cartao"=>trim($request->numero_cartao),"cvv"=>$request->cvv,"nome_cartao"=>$request->nome_cartao,"validade"=>$request->validade];
+        $number_card = str_replace(' ','@',$request->numero_cartao);
+        $nome_cartao = str_replace(' ','@',$request->nome_cartao);
+        $requests = ["id_contrato"=>$request->id_contrato,"numero_cartao"=>$number_card,"cvv"=>$request->cvv,"nome_cartao"=>$nome_cartao,"validade"=>$request->validade];
         return $requests;
         
     }

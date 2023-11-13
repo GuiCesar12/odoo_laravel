@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ContractsController;
+
+use function Laravel\Prompts\select;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,15 +26,17 @@ Route::get('/', function () {
 
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/validate',[LoginController::class,'login'])->name('login_validate');
-
+Route::get('/logout',[LoginController::class,'logout'])->name('logout')->middleware('odoo');
 ///////////Invoices///////////////////
 Route::prefix('invoices')->group(function(){
     Route::get('/',[InvoiceController::class,'index'])->name('invoices')->middleware('odoo');
     Route::get('/select',[InvoiceController::class,'select'])->name('selectInvoices')->middleware('odoo');
+    Route::post('/download',[InvoiceController::class,'download'])->name('downloadInvoice')->middleware('odoo');
 });
 /////////Contracts///////////////////////////////////
 Route::prefix('contracts')->group(function(){
     Route::get('/',[ContractsController::class,'index'])->name('contracts')->middleware('odoo');
     Route::get('/select',[ContractsController::class,'select'])->name('selectContracts');
     Route::post('/updatePayment',[ContractsController::class,'update'])->name('updatePayments');
+    
 });

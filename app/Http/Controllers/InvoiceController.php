@@ -20,4 +20,10 @@ class InvoiceController extends Controller
         $invoices = $invoices->get_invoices($datas["email"],$datas["senha"],$datas["id"]);
         return $invoices;
     }
+    public function download(Request $request){
+        $datas = Session::get('email');
+        $invoices = new Invoice;
+        $result = $invoices->download_invoice($datas["email"],$datas["senha"],$request->id_invoice);
+        dd($result);
+    }
 }

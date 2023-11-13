@@ -32,4 +32,9 @@ class LoginController extends Controller
     
         //seta o middleware de sessao
     }
+    public function logout(){
+        Session::flush();
+        Session::forget('email');
+        return redirect()->back();
+    }
 }

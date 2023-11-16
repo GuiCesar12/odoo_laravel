@@ -5,6 +5,7 @@ use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade\Pdf;
 class InvoiceController extends Controller
 {
     public function index(){
@@ -21,9 +22,10 @@ class InvoiceController extends Controller
         return $invoices;
     }
     public function download(Request $request){
-        $datas = Session::get('email');
+        $session = Session::get('email');
         $invoices = new Invoice;
-        $result = $invoices->download_invoice($datas["email"],$datas["senha"],$request->id_invoice);
-        dd($result);
+        $datas = $invoices->download_invoice($session["email"],$session["senha"],$request->id_invoice);
+        $pdf = Pdf::loadView('invoices.pdf',$datas);
+        return $pdf->download('invoices.pdf');
     }
 }

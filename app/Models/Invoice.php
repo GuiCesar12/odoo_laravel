@@ -26,7 +26,7 @@ class Invoice extends Model
     public function download_invoice($user,$pass,$id_invoice){
         $run = shell_exec("python3 python_scripts/download_invoice.py " . $user . " " . $pass." ".$id_invoice." 2>&1");
         $result = json_decode($run,true);
-        dd($run);
-        return $result["id"];
+        // dd($run);
+        return $result;
     }
 }

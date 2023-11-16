@@ -105,7 +105,7 @@ $(document).ready(function() {
         columnDefs:[{
         target:4,
         render:function(data){
-            return `<button type="button" class="btn btn-primary "id="modal" data-toggle="modal" data-target="#exampleModalLong">Details</button>`;
+            return `<button type="button" class="btn btn-primary "id="modal" data-toggle="modal" data-target="#exampleModalLong">Payments</button>`;
 
         }
         }]
@@ -133,7 +133,7 @@ $(document).on('click','#modal',function(){
     $('#validade').val(' ').attr('disabled','disabled')
     $('#validade').val(' ').prop('disabled',true)
     $('#exampleModalLong').modal('toggle')
-
+    $('#paymentsCollapse').click()
 })
 $(document).on('click','#edit_payment',function(){
     $('#cancel-alter').show()

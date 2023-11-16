@@ -5,17 +5,9 @@
             <div class="modal-header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                              <button class="accordion-button collapsed" id="collapseProject" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Contract
-                              </button>
-                            </h2>
-                        </div>
-                        
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <h2 class="accordion-header" id="flush-headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                <button class="accordion-button collapsed" id="paymentsCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                                     Payments
                                 </button>
                             </h2>
@@ -24,24 +16,6 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-lg-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-title mb-0">
-                                                
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="accordion-item">
                     <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">

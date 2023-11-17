@@ -1,11 +1,14 @@
 <?php
-
+// require_once PATH_ROOT . 'TCPDF/tcpdf.php';
+// require_once PATH_ROOT . 'TCPDF/tcpdi.php';
 namespace App\Http\Controllers;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Session;
-use Barryvdh\DomPDF\Facade\Pdf;
+// use Barryvdh\DomPDF\Facade\Pdf;
+use Mpdf\Mpdf;
+
 class InvoiceController extends Controller
 {
     public function index(){
@@ -25,7 +28,37 @@ class InvoiceController extends Controller
         $session = Session::get('email');
         $invoices = new Invoice;
         $datas = $invoices->download_invoice($session["email"],$session["senha"],$request->id_invoice);
-        $pdf = Pdf::loadView('invoices.pdf',$datas);
-        return $pdf->download('invoices.pdf');
+        // dd($datas[0]["id"]);
+        $PATH_PDF = resource_path('pdf_files/template1.pdf');
+        $mpdf = new Mpdf;
+        $pagecount = $mpdf->SetSourceFile($PATH_PDF);
+        for($count = 1; $count <= $pagecount; $count++){
+            $tplId = $mpdf->ImportPage($count);
+            $mpdf->SetPageTemplate($tplId);
+            $mpdf->AddPage();
+        }
+        $mpdf->SetTitle('Laudo');
+        $mpdf->SetXY(180,55);
+        $mpdf->WriteHTML($datas[0]["invoice_date_due"]);
+        $mpdf->SetXY(11,55);
+        $mpdf->WriteHTML($datas[0]["invoice_date"]);
+        $mpdf->SetXY(14,73);
+        $mpdf->WriteHTML("<hr style='border: 1px solid black;'><br>");
+        $mpdf->SetXY(15,72);
+        $mpdf->WriteHTML("TTRX");
+        $mpdf->SetXY(58,72);
+        $mpdf->WriteHTML(intval($datas[0]["amount_by_group"][0][5]).".00");
+        $mpdf->SetXY(98,66);
+        $mpdf->WriteHTML("Price");
+        $mpdf->SetXY(90,72);
+        $mpdf->WriteHTML($datas[0]["amount_by_group"][0][4]);
+        $mpdf->SetXY(130,72);
+        $mpdf->WriteHTML($datas[0]["amount_by_group"][0][3]);
+        $mpdf->SetXY(185,72);
+        $mpdf->WriteHTML("$ ".$datas[0]["amount_total"]);
+
+        $mpdf->Output('nome_qualquer.pdf','D');
+
+        // return ;
     }
 }

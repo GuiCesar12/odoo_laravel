@@ -32,12 +32,12 @@
         <div style="display: flex; justify-content: space-between;">
 
             <div style="text-align: left;">
-                <p class="s2" style="padding-top: 19pt; padding-left: 7pt; text-indent: 0pt; text-align: left; margin: 0;">Invoice {{$datas->name}}</p>
+                <p class="s2" style="padding-top: 19pt; padding-left: 7pt; text-indent: 0pt; text-align: left; margin: 0;">Invoice {{$datas[0]["name"]}}</p>
             </div>
         
             <div style="text-align: right;">
                 <!-- Adicionei uma linha vazia para manter o espaço entre os parágrafos -->
-                <p class="s1" style="padding-top: 5pt; padding-left: 7pt; text-indent: 0pt; text-align: left; margin: 0;">{{$datas->partner_id[1]}}</p>
+                <p class="s1" style="padding-top: 5pt; padding-left: 7pt; text-indent: 0pt; text-align: left; margin: 0;">{{$datas[0]["partner_id"][1]}}</p>
             </div>
         
         </div>
@@ -46,12 +46,12 @@
 
             <div style="text-align: left;">
                 <p style="padding-top: 0; text-indent: 0pt; text-align: left; margin: 0;">Invoice Date:</p>
-                <p class="s1" style="padding-top: 3pt; text-indent: 0pt; text-align: left; margin: 0;">{{$datas->invoice_date}}</p>
+                <p class="s1" style="padding-top: 3pt; text-indent: 0pt; text-align: left; margin: 0;">{{$datas[0]["invoice_date"]}}</p>
             </div>
         
             <div style="text-align: right;">
                 <p style="padding-top: 0; text-indent: 0pt; text-align: left; margin: 0;">Due Date:</p>
-                <p class="s1" style="padding-top: 3pt; text-indent: 0pt; text-align: left; margin: 0;">{{$datas->invoice_date_due}}</p>
+                <p class="s1" style="padding-top: 3pt; text-indent: 0pt; text-align: left; margin: 0;">{{$datas[0]["invoice_date_due"]}}</p>
             </div>
         
         </div>
@@ -74,24 +74,24 @@
                 <tr style="height:31pt">
                     <td style="width:113pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">TTRX</p></td>
                     <td style="width:176pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-left: 25pt;text-indent: 0pt;text-align: left;">1.00 Units</p></td>
-                    <td style="width:159pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-left: 0pt;text-indent: 0pt;text-align: left;">{{$datas->amount_by_group[5]}}</p></td>
-                    <td style="width:159pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-left: 0pt;text-indent: 0pt;text-align: left;">{{$datas->amount_by_group[0]}}</p></td>
-                    <td style="width:107pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">{{$datas->amount_by_group[4]}}</p></td>
+                    <td style="width:159pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-left: 0pt;text-indent: 0pt;text-align: left;">{{$datas[0]["date"]}}</p></td>
+                    <td style="width:159pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-left: 0pt;text-indent: 0pt;text-align: left;">{{$datas[0]["date"]}}</p></td>
+                    <td style="width:107pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">{{$datas[0]["date"]}}</p></td>
                 </tr>
                 <tr style="height:21pt;">
                     <td style="width:289pt" colspan="3"><p style="text-indent: 40pt;text-align: right;"><br/></p></td>
                     <td style="width:159pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#DDE1E5"><p class="s4" style="padding-top: 4pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">Subtotal</p></td>
-                    <td style="width:107pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">{{$datas->amount_by_group[4]}}</p></td>
+                    <td style="width:107pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#DDE1E5"><p class="s3" style="padding-top: 4pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">{{$datas[0]["date"]}}</p></td>
                 </tr>
                 <tr style="height:21pt">
                     <td style="width:289pt" colspan="3"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
-                    <td style="width:159pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5;border-bottom-style:solid;border-bottom-width:1pt"><p class="s3" style="padding-top: 4pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">{{$datas->amount_by_group[0]}}</p></td>
-                    <td style="width:107pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5;border-bottom-style:solid;border-bottom-width:1pt"><p class="s3" style="padding-top: 4pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">{{$datas->amount_by_group[3]}}</p></td>
+                    <td style="width:159pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5;border-bottom-style:solid;border-bottom-width:1pt"><p class="s3" style="padding-top: 4pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">{{$datas[0]["date"]}}</p></td>
+                    <td style="width:107pt;border-top-style:solid;border-top-width:1pt;border-top-color:#DDE1E5;border-bottom-style:solid;border-bottom-width:1pt"><p class="s3" style="padding-top: 4pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">{{$datas[0]["date"]}}</p></td>
                 </tr>
                 <tr style="height:34pt">
-                    <td style="width:289pt" colspan="3"><p style="text-indent: 0pt;text-align: left;"><br/></p><p class="s3" style="padding-top: 9pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">Please use the following communication for your payment : <span class="s5">{{$datas->name}}</span></p></td>
+                    <td style="width:289pt" colspan="3"><p style="text-indent: 0pt;text-align: left;"><br/></p><p class="s3" style="padding-top: 9pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">Please use the following communication for your payment : <span class="s5">{{$datas[0]["name"]}}</span></p></td>
                     <td style="width:159pt;border-top-style:solid;border-top-width:1pt"><p class="s4" style="padding-top: 4pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">Total</p></td>
-                    <td style="width:107pt;border-top-style:solid;border-top-width:1pt"><p class="s3" style="padding-top: 4pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">$ {{$datas->amount_total_signed}}</p></td>
+                    <td style="width:107pt;border-top-style:solid;border-top-width:1pt"><p class="s3" style="padding-top: 4pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">$ {{$datas[0]["amount_total_signed"]}}</p></td>
                 </tr>
             </tbody>
         </table>

@@ -31,7 +31,7 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout')->middlew
 Route::prefix('invoices')->group(function(){
     Route::get('/',[InvoiceController::class,'index'])->name('invoices')->middleware('odoo');
     Route::get('/select',[InvoiceController::class,'select'])->name('selectInvoices')->middleware('odoo');
-    Route::post('/download',[InvoiceController::class,'download'])->name('downloadInvoice')->middleware('odoo');
+    Route::get('/download',[InvoiceController::class,'download'])->name('downloadInvoice')->middleware('odoo');
 });
 /////////Contracts///////////////////////////////////
 Route::prefix('contracts')->group(function(){

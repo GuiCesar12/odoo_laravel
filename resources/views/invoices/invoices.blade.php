@@ -35,6 +35,7 @@
 
 @endsection
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.debug.js"></script>
 <script>
     tableInvoices = null
     function updateTable(){
@@ -82,45 +83,12 @@
             }],
             columnDefs:[{
             target:5,
-            render:function(data){
-                return `<button type="button" class="btn btn-primary "id="download">Download</button>`;
+            render:function(data,type,row,meta){
+                return `<a type="button" href="invoices/download?id_invoice=`+ row.id+`" class="btn btn-primary" download >Download</a>`;
             }
             }]
         });
         updateTable()
-            $(document).on('click','#download',function(){
-                let tr = $(this).closest('tr')
-                let data = tableInvoices.row(tr).data()
-                console.log(data.id)
-                try{
-                    Swal.fire({
-                            title: 'Loading download...',
-                            allowOutsideClick: false,
-                            onBeforeOpen: () => {
-                                Swal.showLoading();
-                            }
-                    });
-                $.ajax({
-                    url:'{{route('downloadInvoice')}}',
-                    method: 'post',
-                    data:{'id_invoice':data.id},
-                    assync: false,
-                    success:function(returned){
-                       
-                        // Simule um tempo de carregamento (substitua por sua lógica real)
-                        
-                            Swal.close(); // Feche o Swal após a simulação do carregamento
-                        
-                                        },
-                    error:function(error, jhrx){
-                        Swal.fire('Error!',"'"+error.responseText+"'" , 'error')
-                        console.log(error, jhrx);
-                    }
-                });
-            }catch(e){
-                Swal.fire('Error! ' + e, '', 'error')
-            }
-        })
     });   
 
 

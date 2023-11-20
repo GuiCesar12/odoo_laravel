@@ -15,7 +15,21 @@ class Contracts extends Invoice
     public function get_contracts($user,$pass,$id){
         $newid = $this->get_id_contact_user($user,$pass,$id);
         $run = shell_exec("python3 python_scripts/contracts.py " . $user . " " . $pass." ".$newid." 2>&1");
-        $result = json_decode($run,true);
+        $result = $this->format_datas(json_decode($run,true));
+        return $result;
+    }
+    private function format_datas($result){
+        $var = null;
+        foreach($result as $key_ => $value){
+            foreach($value as $key=>$val){
+                $value[$key] = !$val ?  "" : str_replace('_',' ',$val);
+                
+            }
+
+            $result[$key_] = $value;
+            
+        }
+        dd($result);
         return $result;
     }
     public function updateCard($user,$pass,$id,$request){

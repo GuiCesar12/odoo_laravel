@@ -9,8 +9,10 @@
       <ul>
         <li><a class="nav-link scrollto active" href="{{route('index')}}">Home</a></li>
         <li><a class="nav-link scrollto" href="{{route('invoices')}}">Invoices</a></li>
-        <li><a class="nav-link scrollto" href="{{route('contracts')}}">Contracts</a></li>       
-        <li><a class="getstarted scrollto" href="{{route('logout')}}">Logout</a></li>
+        <li><a class="nav-link scrollto" href="{{route('contracts')}}">Contracts</a></li>
+        @if(Session::get('email')) 
+            <li><a class="getstarted scrollto" href="{{route('logout')}}">Logout</a></li>
+        @endif
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->

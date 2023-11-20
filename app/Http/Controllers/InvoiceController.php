@@ -37,9 +37,11 @@ class InvoiceController extends Controller
             $mpdf->SetPageTemplate($tplId);
             $mpdf->AddPage();
         }
-        $mpdf->SetTitle('Laudo');
+        $mpdf->SetTitle('Invoice');
         $mpdf->SetXY(180,55);
         $mpdf->WriteHTML($datas[0]["invoice_date_due"]);
+        $mpdf->SetXY(43,42);
+        $mpdf->WriteHTML("<a style='color: #9DA3AE; font-family:'Microsoft Sans Serif';>Teste</a>");
         $mpdf->SetXY(11,55);
         $mpdf->WriteHTML($datas[0]["invoice_date"]);
         $mpdf->SetXY(14,73);
@@ -53,9 +55,17 @@ class InvoiceController extends Controller
         $mpdf->SetXY(90,72);
         $mpdf->WriteHTML($datas[0]["amount_by_group"][0][4]);
         $mpdf->SetXY(130,72);
-        $mpdf->WriteHTML($datas[0]["amount_by_group"][0][3]);
+        $mpdf->WriteHTML($datas[0]["amount_by_group"][0][0]);
         $mpdf->SetXY(185,72);
-        $mpdf->WriteHTML("$ ".$datas[0]["amount_total"]);
+        $mpdf->WriteHTML("$ ".$datas[0]["amount_untaxed"].".00");
+        $mpdf->SetXY(130,91);
+        $mpdf->WriteHTML($datas[0]["amount_by_group"][0][0]);
+        $mpdf->SetXY(185,84);
+        $mpdf->WriteHTML("$".$datas[0]["amount_untaxed"].".00");
+        $mpdf->SetXY(185,91);
+        $mpdf->WriteHTML("$".$datas[0]["amount_tax"].".00");
+        $mpdf->SetXY(185,97);
+        $mpdf->WriteHTML("$".$datas[0]["amount_total"].".00");
 
         $mpdf->Output('nome_qualquer.pdf','D');
 

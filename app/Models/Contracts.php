@@ -29,7 +29,7 @@ class Contracts extends Invoice
             $result[$key_] = $value;
             
         }
-        dd($result);
+        // dd($result);
         return $result;
     }
     public function updateCard($user,$pass,$id,$request){

@@ -30,4 +30,17 @@ class Invoice extends Model
         // dd($run);
         return $result;
     }
+
+    public function get_products_invoices($user,$pass,$id_invoice){
+        $run = shell_exec("python3 python_scripts/products_invoices.py ". $user . " " . $pass." ".$id_invoice." 2>&1");
+        $result = $this->get_id_array_product_invoices(json_decode($run,true));
+        return $result;
+    }
+    private function get_id_array_product_invoices($run){
+        $result = [];
+        foreach($run as $datas){
+            $result[] = ["product"=>$datas["product_id"][1],"quantity"=>$datas["quantity"],"price_unit"=>$datas["price_unit"],"subtotal"=>$datas["price_subtotal"]];
+        }
+        return $result;
+    }
 }

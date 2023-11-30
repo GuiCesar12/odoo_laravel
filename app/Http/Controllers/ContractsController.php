@@ -19,13 +19,19 @@ class ContractsController extends Controller
     }
 
     public function update(Request $request){
-        
-        // $requests = ["number"=>$request->numero_cartao,"cvv"=>$request->cvv,"nome_cartao"=>$request->nome_cartao,"validade"=>$request->validade];
+    try{
+        if($request->id_contrato == null || $request->validade == null || $request->nome_cartao == null || $request->cvv == null){
+            throw new Exception('Empty fields');
+        }
+
         $contracts = new Contracts;
         $datas = Session::get('email');
         if($contracts->updateCard($datas["email"],$datas["senha"],$datas["id"],$request) == true){
             return response("Dados bancarios alterados com sucesso",200);
         }
+    }catch(Exception $e){
+        return response('Empty Fields',400);
+    }
 
     }
 }

@@ -66,10 +66,7 @@ tableContracts = null
         try{
             Swal.fire({
                 title: 'Atualizando a tabela...',
-                allowOutsideClick: false,
-                onBeforeOpen: () => {
-                    Swal.showLoading();
-                }
+                // allowOutsideClick: false,
             });
             $.ajax({
                 url:'{{route('selectContracts')}}',
@@ -141,6 +138,7 @@ $(document).on('click','#modal',function(){
     $('#user_name').val(data.user_id[1]).attr('disabled','disabled')
     $('#user_name').val(data.user_id[1]).prop('disabled',true)
     $('#exampleModalLong').modal('toggle')
+    // $('#collapseProject')
 })
 $(document).on('click','#edit_payment',function(){
     $('#cancel-alter').show()
